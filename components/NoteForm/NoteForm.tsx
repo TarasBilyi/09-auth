@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useId } from "react";
 import css from "./NoteForm.module.css";
 import toast from "react-hot-toast";
@@ -11,6 +11,7 @@ import { useNoteDraftStore } from "@/lib/store/noteStore";
 
 function NoteForm() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const fieldId = useId();
   const { draft, setDraft, clearDraft } = useNoteDraftStore();
 
@@ -41,6 +42,7 @@ function NoteForm() {
     mutationFn: (newNote: NewNoteBody) => createNote(newNote),
     onSuccess: () => {
       clearDraft();
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
       toast.success("Note created successfully!");
       router.push("/notes/filter/all");
     },

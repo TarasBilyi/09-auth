@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: `${user.username} | Profile`,
       description: `Перегляньте профіль користувача ${user.username}`,
-      url: "https://yourdomain.com/profile", // ← змініть на реальний домен
+      url: "https://09-auth-pi-red.vercel.app/profile",
       images: [
         {
           url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
